@@ -7,7 +7,7 @@
 ######################################################################
 p6df::modules::terraform::deps() {
     ModuleDeps=(
-        p6m7g8/p6df-go
+        p6m7g8-dotfiles/p6df-go
         ohmyzsh/ohmyzsh:plugins/terraform
     )
 }
@@ -57,7 +57,7 @@ p6df::modules::terraform::external::brew() {
 ######################################################################
 p6df::modules::terraform::home::symlink() {
 
-    ln -fs $P6_DFZ_P6M7G8_DIR/p6-terraform/share/.terraformrc $HOME/.terraformrc
+    ln -fs $P6_DFZ_P6M7G8_DOTFILES_DIR/p6-terraform/share/.terraformrc $HOME/.terraformrc
 }
 
 ######################################################################
