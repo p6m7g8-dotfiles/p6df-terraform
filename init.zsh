@@ -50,19 +50,6 @@ p6df::modules::terraform::external::brew() {
 ######################################################################
 #<
 #
-# Function: p6df::modules::terraform::home::symlink()
-#
-#  Environment:	 P6_DFZ_P6M7G8_DIR
-#>
-######################################################################
-p6df::modules::terraform::home::symlink() {
-
-    ln -fs $P6_DFZ_P6M7G8_DOTFILES_DIR/p6-terraform/share/.terraformrc $HOME/.terraformrc
-}
-
-######################################################################
-#<
-#
 # Function: p6df::modules::terraform::init()
 #
 #>
