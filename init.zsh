@@ -25,6 +25,11 @@ p6df::modules::terraform::vscodes() {
     code --install-extension hashicorp.terraform
 }
 
+p6df::modules::terraform::home::symlink() {
+
+    p6_file_symlink "$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6df-terraform/share/.terraform.d" ".terraform.d"
+}
+
 ######################################################################
 #<
 #
@@ -174,7 +179,7 @@ p6_terraform_destroy() {
 ######################################################################
 p6_terraform_prompt_info() {
 
-    if [ -d .terraform ]; then
+    if p6_dir_exists ".terraform"; then
         local str
         str="tf:\t  $(p6_terraform_workspace_show)#$(p6_terraform_workspace_tfvar_file)"
         p6_return_str "$str"
