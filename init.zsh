@@ -17,6 +17,7 @@ p6df::modules::terraform::deps() {
 #
 # Function: p6df::modules::terraform::vscodes()
 #
+#  Depends:	 p6_file
 #>
 ######################################################################
 p6df::modules::terraform::vscodes() {
@@ -69,6 +70,31 @@ p6df::modules::terraform::external::brew() {
 #>
 ######################################################################
 p6df::modules::terraform::init() {
+
+  p6df::modules::terraform::aliases::init
+  p6df::modules::terraform::prompt::init
+}
+
+######################################################################
+#<
+#
+# Function: p6df::modules::terraform::prompt::init()
+#
+#>
+######################################################################
+p6df::modules::terraform::prompt::init() {
+
+  p6df::core::prompt::line::add "p6df::modules::terraform::prompt::line"
+}
+
+######################################################################
+#<
+#
+# Function: p6df::modules::terraform::aliases::init()
+#
+#>
+######################################################################
+p6df::modules::terraform::aliases::init() {
 
     alias tf='terraform'
     alias tfw='terraform workspace'
@@ -184,6 +210,7 @@ p6_terraform_destroy() {
 #  Returns:
 #	str - str
 #
+#  Depends:	 p6_dir
 #>
 ######################################################################
 p6_terraform_prompt_info() {
