@@ -52,7 +52,6 @@ p6df::modules::terraform::external::brew() {
     brew install hashicorp/tap/terraform
 
     brew install terraform-inventory
-    brew install terraform-provisioner-ansible
     brew install terraform-docs
     brew install terraform_landscape
     brew install terraformer
