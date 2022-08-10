@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 ######################################################################
 #<
 #
@@ -17,13 +18,14 @@ p6df::modules::terraform::deps() {
 #
 # Function: p6df::modules::terraform::vscodes()
 #
-#  Depends:	 p6_file
 #>
 ######################################################################
 p6df::modules::terraform::vscodes() {
 
     # terrafrom
     code --install-extension hashicorp.terraform
+
+    p6_return_void
 }
 
 ######################################################################
@@ -31,13 +33,14 @@ p6df::modules::terraform::vscodes() {
 #
 # Function: p6df::modules::terraform::home::symlink()
 #
-#  Depends:	 p6_file
 #  Environment:	 P6_DFZ_SRC_P6M7G8_DOTFILES_DIR
 #>
 ######################################################################
 p6df::modules::terraform::home::symlink() {
 
     p6_file_symlink "$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6df-terraform/share/.terraform.d" ".terraform.d"
+
+    p6_return_void
 }
 
 ######################################################################
@@ -59,6 +62,8 @@ p6df::modules::terraform::external::brew() {
     brew install terraform-rover
     brew install terraform-ls
     brew install iam-policy-json-to-terraform
+
+    p6_return_void
 }
 
 ######################################################################
@@ -72,18 +77,8 @@ p6df::modules::terraform::init() {
 
   p6df::modules::terraform::aliases::init
   p6df::modules::terraform::prompt::init
-}
 
-######################################################################
-#<
-#
-# Function: p6df::modules::terraform::prompt::init()
-#
-#>
-######################################################################
-p6df::modules::terraform::prompt::init() {
-
-  p6df::core::prompt::line::add "p6df::modules::terraform::prompt::line"
+  p6_return_void
 }
 
 ######################################################################
@@ -98,6 +93,20 @@ p6df::modules::terraform::aliases::init() {
     alias tf='terraform'
     alias tfw='terraform workspace'
     alias tg=terragrunt
+
+    p6_return_void
+}
+
+######################################################################
+#<
+#
+# Function: p6df::modules::terraform::prompt::init()
+#
+#>
+######################################################################
+p6df::modules::terraform::prompt::init() {
+
+  p6df::core::prompt::line::add "p6df::modules::terraform::prompt::line"
 }
 
 ######################################################################
@@ -122,6 +131,8 @@ p6df::modules::terraform::prompt::line() {
 p6_terraform_workspace_show() {
 
     terraform workspace show
+
+    p6_return_void
 }
 
 ######################################################################
@@ -187,6 +198,8 @@ p6_terraform_apply() {
 p6_terraform_console() {
 
     terraform console -var-file=$(p6_terraform_workspace_tfvar_file)
+
+    p6_return_void
 }
 
 ######################################################################
@@ -209,7 +222,6 @@ p6_terraform_destroy() {
 #  Returns:
 #	str - str
 #
-#  Depends:	 p6_dir
 #>
 ######################################################################
 p6_terraform_prompt_info() {
