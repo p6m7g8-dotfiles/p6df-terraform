@@ -54,12 +54,9 @@
 - p6df::modules::terraform::deps()
 - p6df::modules::terraform::external::brew()
 - p6df::modules::terraform::home::symlink()
-- p6df::modules::terraform::init()
-- p6df::modules::terraform::prompt::init()
-- p6df::modules::terraform::prompt::line()
 - p6df::modules::terraform::vscodes()
 - path ./tfvars/${ws}.tfvars = p6_terraform_workspace_tfvar_file()
-- str str = p6_terraform_prompt_info()
+- str str = p6df::modules::terraform::prompt::line()
 
 
 

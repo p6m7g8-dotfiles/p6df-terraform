@@ -69,21 +69,6 @@ p6df::modules::terraform::external::brew() {
 ######################################################################
 #<
 #
-# Function: p6df::modules::terraform::init()
-#
-#>
-######################################################################
-p6df::modules::terraform::init() {
-
-  p6df::modules::terraform::aliases::init
-  p6df::modules::terraform::prompt::init
-
-  p6_return_void
-}
-
-######################################################################
-#<
-#
 # Function: p6df::modules::terraform::aliases::init()
 #
 #>
@@ -100,25 +85,22 @@ p6df::modules::terraform::aliases::init() {
 ######################################################################
 #<
 #
-# Function: p6df::modules::terraform::prompt::init()
+# Function: str str = p6df::modules::terraform::prompt::line()
 #
-#>
-######################################################################
-p6df::modules::terraform::prompt::init() {
-
-  p6df::core::prompt::line::add "p6df::modules::terraform::prompt::line"
-}
-
-######################################################################
-#<
-#
-# Function: p6df::modules::terraform::prompt::line()
+#  Returns:
+#	str - str
 #
 #>
 ######################################################################
 p6df::modules::terraform::prompt::line() {
 
-    p6_terraform_prompt_info
+    if p6_dir_exists ".terraform"; then
+        local str
+        str="tf:\t  $(p6_terraform_workspace_show)#$(p6_terraform_workspace_tfvar_file)"
+        p6_return_str "$str"
+    else
+        p6_return_void
+    fi
 }
 
 ######################################################################
@@ -212,25 +194,4 @@ p6_terraform_console() {
 p6_terraform_destroy() {
 
     terraform destroy -var-file=$(p6_terraform_workspace_tfvar_file)
-}
-
-######################################################################
-#<
-#
-# Function: str str = p6_terraform_prompt_info()
-#
-#  Returns:
-#	str - str
-#
-#>
-######################################################################
-p6_terraform_prompt_info() {
-
-    if p6_dir_exists ".terraform"; then
-        local str
-        str="tf:\t  $(p6_terraform_workspace_show)#$(p6_terraform_workspace_tfvar_file)"
-        p6_return_str "$str"
-    else
-        p6_return_void
-    fi
 }
