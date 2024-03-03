@@ -58,8 +58,6 @@ p6df::modules::terraform::external::brew() {
     brew install terraform-docs
     brew install terraform_landscape
     brew install terraformer
-    brew install terraforming
-    brew install terraform-rover
     brew install terraform-ls
     brew install iam-policy-json-to-terraform
 
