@@ -10,8 +10,7 @@
   - [Summary](#summary)
   - [Contributing](#contributing)
   - [Code of Conduct](#code-of-conduct)
-  - [Changes](#changes)
-    - [Usage](#usage)
+  - [Usage](#usage)
   - [Author](#author)
 
 ### Badges
@@ -34,32 +33,70 @@
 
 - [Code of Conduct](https://github.com/p6m7g8/.github/blob/master/CODE_OF_CONDUCT.md)
 
-## Changes
-
-- [Change Log](CHANGELOG.md)
-
 ## Usage
+
+
+### Aliases
+
+- tf -> p6df::modules::terraform::cmd
+- tfa -> p6df::modules::terraform::cli::apply
+- tfc -> p6df::modules::terraform::cli::console
+- tfd -> p6df::modules::terraform::cli::destroy
+- tfp -> p6df::modules::terraform::cli::plan
+- tfsl -> p6df::modules::terraform::cli::state::list
+- tfv -> p6df::modules::terraform::cli::validate
+- tfwS -> p6df::modules::terraform::cli::workspace::select
+- tfws -> p6df::modules::tteraform::cli::workspace::show
+- tg -> terragrunt
+
+### Functions
 
 ### p6df-terraform:
 
 #### p6df-terraform/init.zsh:
 
-- p6_terraform_apply()
-- p6_terraform_console()
-- p6_terraform_destroy()
-- p6_terraform_plan()
-- p6_terraform_validate()
-- p6_terraform_workspace_show()
-- p6df::modules::terraform::aliases::init()
+- p6df::modules::terraform::aliases::init(_module, dir)
 - p6df::modules::terraform::deps()
 - p6df::modules::terraform::external::brew()
 - p6df::modules::terraform::home::symlink()
+- p6df::modules::terraform::init(_module, dir)
 - p6df::modules::terraform::vscodes()
-- path ./tfvars/${ws}.tfvars = p6_terraform_workspace_tfvar_file()
 - str str = p6df::modules::terraform::prompt::line()
+- str ver = p6_terraform_version()
+
+
+### p6df-terraform/lib:
+
+#### p6df-terraform/lib/cli.sh:
+
+- p6df::modules::terraform::cli::apply()
+- p6df::modules::terraform::cli::console()
+- p6df::modules::terraform::cli::destroy()
+- p6df::modules::terraform::cli::plan()
+- p6df::modules::terraform::cli::state::list()
+- p6df::modules::terraform::cli::validate()
+- str workspace = p6df::modules::terraform::cli::workspace::select(workspace)
+- str ws = p6df::modules::terraform::cli::workspace::show()
+
+#### p6df-terraform/lib/cmd.sh:
+
+- p6df::modules::terraform::cmd(...)
+
+#### p6df-terraform/lib/util.sh:
+
+- path tfvar_file_path = p6df::modules::terraform::util::tfvar::file()
 
 
 
+## Hier
+```text
+.
+├── cli.sh
+├── cmd.sh
+└── util.sh
+
+1 directory, 3 files
+```
 ## Author
 
 Philip M . Gollucci <pgollucci@p6m7g8.com>
