@@ -22,7 +22,6 @@ p6df::modules::terraform::deps() {
 ######################################################################
 p6df::modules::terraform::vscodes() {
 
-    # terrafrom
     code --install-extension hashicorp.terraform
 
     p6_return_void
@@ -52,16 +51,16 @@ p6df::modules::terraform::home::symlink() {
 ######################################################################
 p6df::modules::terraform::external::brew() {
 
-    brew install hashicorp/tap/terraform
+    p6df::modules::homebrew::cli::brew::install opentofu
+#    p6df::modules::homebrew::cli::brew::install hashicorp/tap/terraform
 
-    brew install terraform-inventory
-    brew install terraform-docs
-    brew install terraform_landscape
-    brew install terraformer
-    brew install terraform-ls
-    brew install iam-policy-json-to-terraform
+    p6df::modules::homebrew::cli::brew::install terraform-inventory
+    p6df::modules::homebrew::cli::brew::install terraform-docs
+    p6df::modules::homebrew::cli::brew::install terraform_landscape
+    p6df::modules::homebrew::cli::brew::install terraformer
+    p6df::modules::homebrew::cli::brew::install terraform-ls
+    p6df::modules::homebrew::cli::brew::install iam-policy-json-to-terraform
 
-    brew install opentofu
 
     p6_return_void
 }
@@ -69,17 +68,51 @@ p6df::modules::terraform::external::brew() {
 ######################################################################
 #<
 #
-# Function: p6df::modules::terraform::aliases::init()
+# Function: p6df::modules::terraform::aliases::init(_module, dir)
+#
+#  Args:
+#	_module -
+#	dir -
 #
 #>
 ######################################################################
 p6df::modules::terraform::aliases::init() {
+    local _module="$1"
+    local dir="$2"
 
-    alias tf='terraform'
-    alias tfw='terraform workspace'
-    alias tg=terragrunt
+    p6_alias "tf" "p6df::modules::terraform::cmd"
+    p6_alias "tfa" "p6df::modules::terraform::cli::apply"
+    p6_alias "tfc" "p6df::modules::terraform::cli::console"
+    p6_alias "tfd" "p6df::modules::terraform::cli::destroy"
+    p6_alias "tfp" "p6df::modules::terraform::cli::plan"
+    p6_alias "tfsl" "p6df::modules::terraform::cli::state::list"
+    p6_alias "tfv" "p6df::modules::terraform::cli::validate"
+    p6_alias "tfwS" "p6df::modules::terraform::cli::workspace::select"
+    p6_alias "tfws" "p6df::modules::tteraform::cli::workspace::show"
+
+    p6_alias "tg" "terragrunt"
 
     p6_return_void
+}
+
+######################################################################
+#<
+#
+# Function: p6df::modules::terraform::init(_module, dir)
+#
+#  Args:
+#	_module -
+#	dir -
+#
+#>
+######################################################################
+p6df::modules::terraform::init() {
+  local _module="$1"
+  local dir="$2"
+
+  p6_bootstrap "$dir"
+
+  p6_return_void
 }
 
 ######################################################################
@@ -94,104 +127,31 @@ p6df::modules::terraform::aliases::init() {
 ######################################################################
 p6df::modules::terraform::prompt::line() {
 
+    local str
     if p6_dir_exists ".terraform"; then
-        local str
-        str="tf:\t  $(p6_terraform_workspace_show)#$(p6_terraform_workspace_tfvar_file)"
-        p6_return_str "$str"
-    else
-        p6_return_void
+      local ver=$(p6_terraform_version)
+      local workspace=$(p6df::modules::terraform::cli::workspace::show)
+      local tfvar_file=$(p6df::modules::terraform::util::tfvar::file)
+      str="tf:\t\t  $ver $workspace | $tfvar_file"
     fi
+
+    p6_return_str "$str"
 }
 
 ######################################################################
 #<
 #
-# Function: p6_terraform_workspace_show()
-#
-#>
-######################################################################
-p6_terraform_workspace_show() {
-
-    terraform workspace show
-
-    p6_return_void
-}
-
-######################################################################
-#<
-#
-# Function: path ./tfvars/${ws}.tfvars = p6_terraform_workspace_tfvar_file()
+# Function: str ver = p6_terraform_version()
 #
 #  Returns:
-#	path - ./tfvars/${ws}.tfvars
+#	str - ver
 #
 #>
 ######################################################################
-p6_terraform_workspace_tfvar_file() {
+p6_terraform_version() {
 
-    local ws=$(terraform workspace show)
+  local ver=$(terraform --version | head -n 1 | cut -d ' ' -f 2)
 
-    p6_return_path "./tfvars/${ws}.tfvars"
+  p6_return_str "$ver"
 }
 
-######################################################################
-#<
-#
-# Function: p6_terraform_validate()
-#
-#>
-######################################################################
-p6_terraform_validate() {
-
-    terraform validate -var-file=$(p6_terraform_workspace_tfvar_file)
-}
-
-######################################################################
-#<
-#
-# Function: p6_terraform_plan()
-#
-#>
-######################################################################
-p6_terraform_plan() {
-
-    terraform plan -var-file=$(p6_terraform_workspace_tfvar_file)
-}
-
-######################################################################
-#<
-#
-# Function: p6_terraform_apply()
-#
-#>
-######################################################################
-p6_terraform_apply() {
-
-    terraform apply -var-file=$(p6_terraform_workspace_tfvar_file)
-}
-
-######################################################################
-#<
-#
-# Function: p6_terraform_console()
-#
-#>
-######################################################################
-p6_terraform_console() {
-
-    terraform console -var-file=$(p6_terraform_workspace_tfvar_file)
-
-    p6_return_void
-}
-
-######################################################################
-#<
-#
-# Function: p6_terraform_destroy()
-#
-#>
-######################################################################
-p6_terraform_destroy() {
-
-    terraform destroy -var-file=$(p6_terraform_workspace_tfvar_file)
-}
