@@ -29,8 +29,8 @@
 - tfp IS p6df::modules::terraform::cli::plan
 - tfsl IS p6df::modules::terraform::cli::state::list
 - tfv IS p6df::modules::terraform::cli::validate
-- tfws IS p6df::modules::tteraform::cli::workspace::show
 - tfwS IS p6df::modules::terraform::cli::workspace::select
+- tfws IS p6df::modules::tteraform::cli::workspace::show
 - tg IS terragrunt
 ### Functions
 
