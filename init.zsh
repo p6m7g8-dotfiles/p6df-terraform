@@ -146,11 +146,17 @@ p6df::modules::terraform::prompt::line() {
 #  Returns:
 #	str - ver
 #
+#  Environment:	 TERRAFORM_BINARY_NAME
 #>
 ######################################################################
 p6_terraform_version() {
 
-  local ver=$(terraform --version | head -n 1 | cut -d ' ' -f 2)
+  local ver
+  if p6_string_eq "tofu" "$TERRAFORM_BINARY_NAME"; then
+    ver=$(tofu --version | head -n 1 | cut -d ' ' -f 2)
+  else
+    ver=$(terraform --version | head -n 1 | cut -d ' ' -f 2)
+  fi
 
   p6_return_str "$ver"
 }
