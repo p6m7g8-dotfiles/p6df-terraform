@@ -23,9 +23,19 @@ p6df::modules::terraform::deps() {
 p6df::modules::terraform::vscodes() {
 
     code --install-extension hashicorp.terraform
+    code --install-extension mindginative.terraform-snippets
 
     p6_return_void
 }
+
+#{
+#  "terraform.languageServer": {
+#    "external": true,
+#    "path": "tofu"
+#  },
+#  "terraform.formatOnSave": true,
+#  "terraform.validateOnSave": true
+#}
 
 ######################################################################
 #<
