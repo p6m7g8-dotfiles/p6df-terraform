@@ -5,8 +5,6 @@
 ## Badges
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-yellowgreen.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Mergify](https://img.shields.io/endpoint.svg?url=https://gh.mergify.io/badges//p6df-terraform/&style=flat)](https://mergify.io)
-[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](<https://gitpod.io/#https://github.com//p6df-terraform>)
 
 ## Summary
 
@@ -22,16 +20,9 @@
 
 ### Aliases
 
-- tf IS p6df::modules::terraform::cmd
-- tfa IS p6df::modules::terraform::cli::apply
-- tfc IS p6df::modules::terraform::cli::console
-- tfd IS p6df::modules::terraform::cli::destroy
-- tfp IS p6df::modules::terraform::cli::plan
 - tfsl IS p6df::modules::terraform::cli::state::list
-- tfv IS p6df::modules::terraform::cli::validate
 - tfwS IS p6df::modules::terraform::cli::workspace::select
-- tfws IS p6df::modules::tteraform::cli::workspace::show
-- tg IS terragrunt
+- tfws IS p6df::modules::terraform::cli::workspace::show
 ### Functions
 
 ## p6df-terraform
@@ -44,7 +35,7 @@
 - p6df::modules::terraform::home::symlink()
 - p6df::modules::terraform::init(_module, dir)
 - p6df::modules::terraform::vscodes()
-- str str = p6df::modules::terraform::prompt::line()
+- str str = p6df::modules::terraform::prompt::mod()
 - str ver = p6_terraform_version()
 
 ## p6df-terraform/lib

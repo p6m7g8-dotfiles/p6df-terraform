@@ -90,17 +90,15 @@ p6df::modules::terraform::aliases::init() {
     local _module="$1"
     local dir="$2"
 
-    p6_alias "tf" "p6df::modules::terraform::cmd"
-    p6_alias "tfa" "p6df::modules::terraform::cli::apply"
-    p6_alias "tfc" "p6df::modules::terraform::cli::console"
-    p6_alias "tfd" "p6df::modules::terraform::cli::destroy"
-    p6_alias "tfp" "p6df::modules::terraform::cli::plan"
+    p6_alias "tf"   "p6df::modules::terraform::cmd"
+    p6_alias "tfa"  "p6df::modules::terraform::cli::apply"
+    p6_alias "tfc"  "p6df::modules::terraform::cli::console"
+    p6_alias "tfd"  "p6df::modules::terraform::cli::destroy"
+    p6_alias "tfp"  "p6df::modules::terraform::cli::plan"
     p6_alias "tfsl" "p6df::modules::terraform::cli::state::list"
-    p6_alias "tfv" "p6df::modules::terraform::cli::validate"
+    p6_alias "tfv"  "p6df::modules::terraform::cli::validate"
     p6_alias "tfwS" "p6df::modules::terraform::cli::workspace::select"
-    p6_alias "tfws" "p6df::modules::tteraform::cli::workspace::show"
-
-    p6_alias "tg" "terragrunt"
+    p6_alias "tfws" "p6df::modules::terraform::cli::workspace::show"
 
     p6_return_void
 }
@@ -128,17 +126,17 @@ p6df::modules::terraform::init() {
 ######################################################################
 #<
 #
-# Function: str str = p6df::modules::terraform::prompt::line()
+# Function: str str = p6df::modules::terraform::prompt::mod()
 #
 #  Returns:
 #	str - str
 #
 #>
 ######################################################################
-p6df::modules::terraform::prompt::line() {
+p6df::modules::terraform::prompt::mod() {
 
     local str
-    if p6_dir_exists ".terraform"; then
+    if p6_dir_exists ".terraform" || p6_file_exists ".terraform-version"; then
       local ver=$(p6_terraform_version)
       local workspace=$(p6df::modules::terraform::cli::workspace::show)
       local tfvar_file=$(p6df::modules::terraform::util::tfvar::file)
