@@ -92,7 +92,7 @@ p6df::modules::terraform::cli::workspace::show() {
 p6df::modules::terraform::cli::workspace::select() {
   local workspace="$1"
 
-  p6df::modules::terraform::cmd workspace select $workspace
+  p6df::modules::terraform::cmd workspace select "$workspace"
 
   p6_return_str="$workspace"
 }
