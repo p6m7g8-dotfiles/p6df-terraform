@@ -23,6 +23,7 @@
 - tfsl IS p6df::modules::terraform::cli::state::list
 - tfwS IS p6df::modules::terraform::cli::workspace::select
 - tfws IS p6df::modules::terraform::cli::workspace::show
+
 ### Functions
 
 ## p6df-terraform
