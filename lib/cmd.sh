@@ -14,6 +14,6 @@ p6df::modules::terraform::cmd() {
 
     local var_file=$(p6df::modules::terraform::util::tfvar::file)
 
-#    terraform "$@" -var-file=$var_file
-     tofu "$@" -var-file=$var_file
+#    terraform "$@" -var-file="$var_file"
+     tofu "$@" -var-file="$var_file"
 }
