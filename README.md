@@ -2,63 +2,75 @@
 
 ## Table of Contents
 
+- [Badges](#badges)
+- [Summary](#summary)
+- [Contributing](#contributing)
+- [Code of Conduct](#code-of-conduct)
+- [Usage](#usage)
+  - [Aliases](#aliases)
+  - [Functions](#functions)
+- [Hierarchy](#hierarchy)
+- [Author](#author)
+
 ## Badges
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-yellowgreen.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ## Summary
 
+TODO: Add a short summary of this module.
+
 ## Contributing
 
-- [How to Contribute](<https://github.com//.github/blob/main/CONTRIBUTING.md>)
+- [How to Contribute](<https://github.com/p6m7g8-dotfiles/.github/blob/main/CONTRIBUTING.md>)
 
 ## Code of Conduct
 
-- [Code of Conduct](<https://github.com//.github/blob/main/CODE_OF_CONDUCT.md>)
+- [Code of Conduct](<https://github.com/p6m7g8-dotfiles/.github/blob/main/CODE_OF_CONDUCT.md>)
 
 ## Usage
 
 ### Aliases
 
-- tfsl IS p6df::modules::terraform::cli::state::list
-- tfwS IS p6df::modules::terraform::cli::workspace::select
-- tfws IS p6df::modules::terraform::cli::workspace::show
+- `tfsl` -> `p6df::modules::terraform::cli::state::list`
+- `tfwS` -> `p6df::modules::terraform::cli::workspace::select`
+- `tfws` -> `p6df::modules::terraform::cli::workspace::show`
 
 ### Functions
 
-## p6df-terraform
+#### p6df-terraform
 
-### p6df-terraform/init.zsh
+##### p6df-terraform/init.zsh
 
-- p6df::modules::terraform::aliases::init(_module, dir)
-- p6df::modules::terraform::deps()
-- p6df::modules::terraform::external::brew()
-- p6df::modules::terraform::home::symlink()
-- p6df::modules::terraform::init(_module, dir)
-- p6df::modules::terraform::vscodes()
-- str str = p6df::modules::terraform::prompt::mod()
-- str ver = p6_terraform_version()
+- `p6df::modules::terraform::aliases::init(_module, dir)`
+- `p6df::modules::terraform::deps()`
+- `p6df::modules::terraform::external::brew()`
+- `p6df::modules::terraform::home::symlink()`
+- `p6df::modules::terraform::init(_module, dir)`
+- `p6df::modules::terraform::vscodes()`
+- `str str = p6df::modules::terraform::prompt::mod()`
+- `str ver = p6_terraform_version()`
 
-## p6df-terraform/lib
+#### p6df-terraform/lib
 
-### p6df-terraform/lib/cli.sh
+##### p6df-terraform/lib/cli.sh
 
-- p6df::modules::terraform::cli::apply()
-- p6df::modules::terraform::cli::console()
-- p6df::modules::terraform::cli::destroy()
-- p6df::modules::terraform::cli::plan()
-- p6df::modules::terraform::cli::state::list()
-- p6df::modules::terraform::cli::validate()
-- str workspace = p6df::modules::terraform::cli::workspace::select(workspace)
-- str ws = p6df::modules::terraform::cli::workspace::show()
+- `p6df::modules::terraform::cli::apply()`
+- `p6df::modules::terraform::cli::console()`
+- `p6df::modules::terraform::cli::destroy()`
+- `p6df::modules::terraform::cli::plan()`
+- `p6df::modules::terraform::cli::state::list()`
+- `p6df::modules::terraform::cli::validate()`
+- `str workspace = p6df::modules::terraform::cli::workspace::select(workspace)`
+- `str ws = p6df::modules::terraform::cli::workspace::show()`
 
-### p6df-terraform/lib/cmd.sh
+##### p6df-terraform/lib/cmd.sh
 
-- p6df::modules::terraform::cmd(...)
+- `p6df::modules::terraform::cmd(...)`
 
-### p6df-terraform/lib/util.sh
+##### p6df-terraform/lib/util.sh
 
-- path tfvar_file_path = p6df::modules::terraform::util::tfvar::file()
+- `path tfvar_file_path = p6df::modules::terraform::util::tfvar::file()`
 
 ## Hierarchy
 
@@ -77,4 +89,4 @@
 
 ## Author
 
-Philip M . Gollucci <pgollucci@p6m7g8.com>
+Philip M. Gollucci <pgollucci@p6m7g8.com>
