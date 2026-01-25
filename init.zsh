@@ -161,11 +161,10 @@ p6_terraform_version() {
 
   local ver
   if p6_string_eq "tofu" "$TERRAFORM_BINARY_NAME"; then
-    ver=$(tofu --version | head -n 1 | cut -d ' ' -f 2)
+    ver=$(tofu --version | p6_filter_row_first 1 | p6_filter_column_pluck 2)
   else
-    ver=$(terraform --version | head -n 1 | cut -d ' ' -f 2)
+    ver=$(terraform --version | p6_filter_row_first 1 | p6_filter_column_pluck 2)
   fi
 
   p6_return_str "$ver"
 }
-
