@@ -61,15 +61,15 @@ p6df::modules::terraform::home::symlink() {
 ######################################################################
 p6df::modules::terraform::external::brew() {
 
-    p6df::modules::homebrew::cli::brew::install opentofu
-#    p6df::modules::homebrew::cli::brew::install hashicorp/tap/terraform
+    p6df::core::homebrew::cli::brew::install opentofu
+#    p6df::core::homebrew::cli::brew::install hashicorp/tap/terraform
 
-    p6df::modules::homebrew::cli::brew::install terraform-inventory
-    p6df::modules::homebrew::cli::brew::install terraform-docs
-    p6df::modules::homebrew::cli::brew::install terraform_landscape
-    p6df::modules::homebrew::cli::brew::install terraformer
-    p6df::modules::homebrew::cli::brew::install terraform-ls
-    p6df::modules::homebrew::cli::brew::install iam-policy-json-to-terraform
+    p6df::core::homebrew::cli::brew::install terraform-inventory
+    p6df::core::homebrew::cli::brew::install terraform-docs
+    p6df::core::homebrew::cli::brew::install terraform_landscape
+    p6df::core::homebrew::cli::brew::install terraformer
+    p6df::core::homebrew::cli::brew::install terraform-ls
+    p6df::core::homebrew::cli::brew::install iam-policy-json-to-terraform
 
 
     p6_return_void
