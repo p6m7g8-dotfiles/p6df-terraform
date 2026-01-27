@@ -22,20 +22,46 @@ p6df::modules::terraform::deps() {
 ######################################################################
 p6df::modules::terraform::vscodes() {
 
-    code --install-extension hashicorp.terraform
-    code --install-extension mindginative.terraform-snippets
+    p6df::modules::vscode::extension::install hashicorp.terraform
+    p6df::modules::vscode::extension::install mindginative.terraform-snippets
 
     p6_return_void
 }
 
-#{
-#  "terraform.languageServer": {
-#    "external": true,
-#    "path": "tofu"
-#  },
-#  "terraform.formatOnSave": true,
-#  "terraform.validateOnSave": true
-#}
+######################################################################
+#<
+#
+# Function: str json = p6df::modules::terraform::vscodes::config()
+#
+#  Returns:
+#	str - json
+#
+#>
+######################################################################
+p6df::modules::terraform::vscodes::config() {
+
+  cat <<'EOF'
+  "[terraform]": {
+    "editor.defaultFormatter": "hashicorp.terraform",
+    "editor.formatOnSave": true
+  },
+  "[terraform-vars]": {
+    "editor.defaultFormatter": "hashicorp.terraform",
+    "editor.formatOnSave": true
+  },
+  "[hcl]": {
+    "editor.defaultFormatter": "hashicorp.terraform",
+    "editor.formatOnSave": true
+  },
+  "terraform.languageServer": {
+    "external": true,
+    "path": "tofu"
+  },
+  "terraform.validateOnSave": true
+EOF
+
+  p6_return_void
+}
 
 ######################################################################
 #<
