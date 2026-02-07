@@ -39,16 +39,13 @@ p6df::modules::terraform::vscodes::config() {
 
   cat <<'EOF'
   "[terraform]": {
-    "editor.defaultFormatter": "hashicorp.terraform",
-    "editor.formatOnSave": true
+    "editor.defaultFormatter": "hashicorp.terraform"
   },
   "[terraform-vars]": {
-    "editor.defaultFormatter": "hashicorp.terraform",
-    "editor.formatOnSave": true
+    "editor.defaultFormatter": "hashicorp.terraform"
   },
   "[hcl]": {
-    "editor.defaultFormatter": "hashicorp.terraform",
-    "editor.formatOnSave": true
+    "editor.defaultFormatter": "hashicorp.terraform"
   },
   "terraform.languageServer": {
     "external": true,
