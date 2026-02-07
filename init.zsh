@@ -16,13 +16,13 @@ p6df::modules::terraform::deps() {
 ######################################################################
 #<
 #
-# Function: p6df::modules::terraform::vscodes()
+# Function: p6df::modules::opentofu::vscodes()
 #
 #>
 ######################################################################
 p6df::modules::terraform::vscodes() {
 
-    p6df::modules::vscode::extension::install hashicorp.terraform
+    p6df::modules::vscode::extension::install opentofu.vscode-opentofu
     p6df::modules::vscode::extension::install mindginative.terraform-snippets
 
     p6_return_void
@@ -31,7 +31,7 @@ p6df::modules::terraform::vscodes() {
 ######################################################################
 #<
 #
-# Function: p6df::modules::terraform::vscodes::config()
+# Function: p6df::modules::opentofu::vscodes::config()
 #
 #>
 ######################################################################
@@ -39,19 +39,15 @@ p6df::modules::terraform::vscodes::config() {
 
   cat <<'EOF'
   "[terraform]": {
-    "editor.defaultFormatter": "hashicorp.terraform"
+    "editor.defaultFormatter": "opentofu.vscode-opentofu"
   },
   "[terraform-vars]": {
-    "editor.defaultFormatter": "hashicorp.terraform"
+    "editor.defaultFormatter": "opentofu.vscode-opentofu"
   },
   "[hcl]": {
-    "editor.defaultFormatter": "hashicorp.terraform"
+    "editor.defaultFormatter": "opentofu.vscode-opentofu"
   },
-  "terraform.languageServer": {
-    "external": true,
-    "path": "tofu"
-  },
-  "terraform.validateOnSave": true
+  "terraform.experimentalFeatures.validateOnSave": true
 EOF
 
   p6_return_void
@@ -139,6 +135,8 @@ p6df::modules::terraform::init() {
   local dir="$2"
 
   p6_bootstrap "$dir"
+
+  p6_env_export "TERRAFORM_BINARY_NAME" "tofu"
 
   p6_return_void
 }
