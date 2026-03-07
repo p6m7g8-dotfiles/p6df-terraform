@@ -18,7 +18,9 @@
 
 ## Summary
 
-TODO: Add a short summary of this module.
+p6df module for Terraform/OpenTofu: CLI tools, workspace management, VSCode
+extensions, and MCP server (`terraform-mcp-server` via brew) for AI-driven
+infrastructure provisioning and resource management.
 
 ## Contributing
 
@@ -33,8 +35,8 @@ TODO: Add a short summary of this module.
 ### Aliases
 
 - `tfsl` -> `p6df::modules::terraform::cli::state::list`
-- `tfws` -> `p6df::modules::terraform::cli::workspace::show`
 - `tfwS` -> `p6df::modules::terraform::cli::workspace::select`
+- `tfws` -> `p6df::modules::terraform::cli::workspace::show`
 
 ### Functions
 
@@ -44,15 +46,16 @@ TODO: Add a short summary of this module.
 
 - `p6df::modules::terraform::aliases::init(_module, dir)`
   - Args:
-    - _module -
-    - dir -
+    - _module
+    - dir
 - `p6df::modules::terraform::deps()`
 - `p6df::modules::terraform::external::brew()`
 - `p6df::modules::terraform::home::symlink()`
 - `p6df::modules::terraform::init(_module, dir)`
   - Args:
-    - _module -
-    - dir -
+    - _module
+    - dir
+- `p6df::modules::terraform::mcp()`
 - `p6df::modules::terraform::vscodes()`
 - `p6df::modules::terraform::vscodes::config()`
 - `str str = p6df::modules::terraform::prompt::mod()`
@@ -70,14 +73,14 @@ TODO: Add a short summary of this module.
 - `p6df::modules::terraform::cli::validate()`
 - `str workspace = p6df::modules::terraform::cli::workspace::select(workspace)`
   - Args:
-    - workspace -
+    - workspace
 - `str ws = p6df::modules::terraform::cli::workspace::show()`
 
 ##### p6df-terraform/lib/cmd.sh
 
 - `p6df::modules::terraform::cmd(...)`
   - Args:
-    - ... -
+    - ...
 
 ##### p6df-terraform/lib/util.sh
 
