@@ -16,7 +16,7 @@ p6df::modules::terraform::deps() {
 ######################################################################
 #<
 #
-# Function: p6df::modules::opentofu::vscodes()
+# Function: p6df::modules::terraform::vscodes()
 #
 #>
 ######################################################################
@@ -31,7 +31,7 @@ p6df::modules::terraform::vscodes() {
 ######################################################################
 #<
 #
-# Function: p6df::modules::opentofu::vscodes::config()
+# Function: p6df::modules::terraform::vscodes::config()
 #
 #>
 ######################################################################
@@ -58,7 +58,7 @@ EOF
 #
 # Function: p6df::modules::terraform::home::symlink()
 #
-#  Environment:	 P6_DFZ_SRC_P6M7G8_DOTFILES_DIR
+#  Environment:	 HOME P6_DFZ_SRC_P6M7G8_DOTFILES_DIR
 #>
 ######################################################################
 p6df::modules::terraform::home::symlink() {
@@ -128,6 +128,7 @@ p6df::modules::terraform::aliases::init() {
 #	_module -
 #	dir -
 #
+#  Environment:	 TERRAFORM_BINARY_NAME
 #>
 ######################################################################
 p6df::modules::terraform::init() {
@@ -185,4 +186,18 @@ p6_terraform_version() {
   fi
 
   p6_return_str "$ver"
+}
+
+######################################################################
+#<
+#
+# Function: p6df::modules::terraform::mcp()
+#
+#>
+######################################################################
+p6df::modules::terraform::mcp() {
+
+  p6df::core::homebrew::cli::brew::install terraform-mcp-server
+
+  p6_return_void
 }
