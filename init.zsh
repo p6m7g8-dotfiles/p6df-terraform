@@ -10,6 +10,10 @@ p6df::modules::terraform::deps() {
     ModuleDeps=(
         p6m7g8-dotfiles/p6df-go
         ohmyzsh/ohmyzsh:plugins/terraform
+        hashicorp/agent-skills
+        antonbabenko/terraform-skill
+        ahmedasmar/devops-claude-skills:iac-terraform
+        akin-ozer/cc-devops-skills
     )
 }
 
