@@ -75,11 +75,11 @@ p6df::modules::terraform::home::symlink() {
 ######################################################################
 #<
 #
-# Function: p6df::modules::terraform::external::brew()
+# Function: p6df::modules::terraform::external::brews()
 #
 #>
 ######################################################################
-p6df::modules::terraform::external::brew() {
+p6df::modules::terraform::external::brews() {
 
     p6df::core::homebrew::cli::brew::install opentofu
 #    p6df::core::homebrew::cli::brew::install hashicorp/tap/terraform
