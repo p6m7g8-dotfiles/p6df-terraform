@@ -60,12 +60,12 @@ EOF
 ######################################################################
 #<
 #
-# Function: p6df::modules::terraform::home::symlink()
+# Function: p6df::modules::terraform::home::symlinks()
 #
 #  Environment:	 HOME P6_DFZ_SRC_P6M7G8_DOTFILES_DIR
 #>
 ######################################################################
-p6df::modules::terraform::home::symlink() {
+p6df::modules::terraform::home::symlinks() {
 
     p6_file_symlink "$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6df-terraform/share/.terraform.d" "$HOME/.terraform.d"
 

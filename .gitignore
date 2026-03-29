@@ -1,2 +1,4 @@
 share/.terraform.d/plugin-cache
 share/.terraform.d/checkpoint_cache
+share/.terraform.d/credentials.tfrc.json
+share/.terraform.d/checkpoint_signature
