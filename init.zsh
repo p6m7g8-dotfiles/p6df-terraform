@@ -203,5 +203,8 @@ p6df::modules::terraform::mcp() {
 
   p6df::core::homebrew::cli::brew::install terraform-mcp-server
 
+  p6df::modules::anthropic::mcp::server::add "terraform" "terraform-mcp-server"
+  p6df::modules::openai::mcp::server::add "terraform" "terraform-mcp-server"
+
   p6_return_void
 }
