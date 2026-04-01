@@ -91,7 +91,6 @@ p6df::modules::terraform::external::brews() {
     p6df::core::homebrew::cli::brew::install terraform-ls
     p6df::core::homebrew::cli::brew::install iam-policy-json-to-terraform
 
-
     p6_return_void
 }
 
@@ -126,21 +125,15 @@ p6df::modules::terraform::aliases::init() {
 ######################################################################
 #<
 #
-# Function: p6df::modules::terraform::init(_module, dir)
-#
-#  Args:
-#	_module -
-#	dir -
+# Function: p6df::modules::terraform::env::init()
 #
 #  Environment:	 TERRAFORM_BINARY_NAME
 #>
 ######################################################################
-p6df::modules::terraform::init() {
+p6df::modules::terraform::env::init() {
+
   local _module="$1"
-  local dir="$2"
-
-  p6_bootstrap "$dir"
-
+  local _dir="$2"
   p6_env_export "TERRAFORM_BINARY_NAME" "tofu"
 
   p6_return_void
@@ -149,21 +142,21 @@ p6df::modules::terraform::init() {
 ######################################################################
 #<
 #
-# Function: str str = p6df::modules::terraform::prompt::mod()
+# Function: str str = p6df::modules::terraform::prompt::context()
 #
 #  Returns:
 #	str - str
 #
 #>
 ######################################################################
-p6df::modules::terraform::prompt::mod() {
+p6df::modules::terraform::prompt::context() {
 
     local str
     if p6_dir_exists ".terraform" || p6_file_exists ".terraform-version"; then
       local ver=$(p6_terraform_version)
       local workspace=$(p6df::modules::terraform::cli::workspace::show)
       local tfvar_file=$(p6df::modules::terraform::util::tfvar::file)
-      str="tf:\t\t  $ver $workspace | $tfvar_file"
+      str="$(p6_string_space_pad "tf:" 16)$ver $workspace | $tfvar_file"
     fi
 
     p6_return_str "$str"
@@ -208,3 +201,4 @@ p6df::modules::terraform::mcp() {
 
   p6_return_void
 }
+
