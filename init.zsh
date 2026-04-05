@@ -1,11 +1,5 @@
 # shellcheck shell=bash
 ######################################################################
-#<
-#
-# Function: p6df::modules::terraform::deps()
-#
-#>
-######################################################################
 p6df::modules::terraform::deps() {
     ModuleDeps=(
         p6m7g8-dotfiles/p6df-go
@@ -18,11 +12,68 @@ p6df::modules::terraform::deps() {
 }
 
 ######################################################################
-#<
-#
-# Function: p6df::modules::terraform::vscodes()
-#
-#>
+p6df::modules::terraform::env::init() {
+
+  local _module="$1"
+  local _dir="$2"
+  p6_env_export "TERRAFORM_BINARY_NAME" "tofu"
+
+  p6_return_void
+}
+
+######################################################################
+p6df::modules::terraform::aliases::init() {
+    local _module="$1"
+    local dir="$2"
+
+    p6_alias "tf"   "p6df::modules::terraform::cmd"
+    p6_alias "tfa"  "p6df::modules::terraform::cli::apply"
+    p6_alias "tfc"  "p6df::modules::terraform::cli::console"
+    p6_alias "tfd"  "p6df::modules::terraform::cli::destroy"
+    p6_alias "tfp"  "p6df::modules::terraform::cli::plan"
+    p6_alias "tfsl" "p6df::modules::terraform::cli::state::list"
+    p6_alias "tfv"  "p6df::modules::terraform::cli::validate"
+    p6_alias "tfwS" "p6df::modules::terraform::cli::workspace::select"
+    p6_alias "tfws" "p6df::modules::terraform::cli::workspace::show"
+
+    p6_return_void
+}
+
+######################################################################
+p6df::modules::terraform::home::symlinks() {
+
+    p6_file_symlink "$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6df-terraform/share/.terraform.d" "$HOME/.terraform.d"
+
+    p6_return_void
+}
+
+######################################################################
+p6df::modules::terraform::external::brews() {
+
+    p6df::core::homebrew::cli::brew::install opentofu
+#    p6df::core::homebrew::cli::brew::install hashicorp/tap/terraform
+
+    p6df::core::homebrew::cli::brew::install terraform-inventory
+    p6df::core::homebrew::cli::brew::install terraform-docs
+    p6df::core::homebrew::cli::brew::install terraform_landscape
+    p6df::core::homebrew::cli::brew::install terraformer
+    p6df::core::homebrew::cli::brew::install terraform-ls
+    p6df::core::homebrew::cli::brew::install iam-policy-json-to-terraform
+
+    p6_return_void
+}
+
+######################################################################
+p6df::modules::terraform::mcp() {
+
+  p6df::core::homebrew::cli::brew::install terraform-mcp-server
+
+  p6df::modules::anthropic::mcp::server::add "terraform" "terraform-mcp-server"
+  p6df::modules::openai::mcp::server::add "terraform" "terraform-mcp-server"
+
+  p6_return_void
+}
+
 ######################################################################
 p6df::modules::terraform::vscodes() {
 
@@ -32,12 +83,6 @@ p6df::modules::terraform::vscodes() {
     p6_return_void
 }
 
-######################################################################
-#<
-#
-# Function: p6df::modules::terraform::vscodes::config()
-#
-#>
 ######################################################################
 p6df::modules::terraform::vscodes::config() {
 
@@ -60,40 +105,34 @@ EOF
 ######################################################################
 #<
 #
+# Function: p6df::modules::terraform::deps()
+#
+#>
+######################################################################
+#<
+#
+# Function: p6df::modules::terraform::vscodes()
+#
+#>
+######################################################################
+#<
+#
+# Function: p6df::modules::terraform::vscodes::config()
+#
+#>
+######################################################################
+#<
+#
 # Function: p6df::modules::terraform::home::symlinks()
 #
 #  Environment:	 HOME P6_DFZ_SRC_P6M7G8_DOTFILES_DIR
 #>
-######################################################################
-p6df::modules::terraform::home::symlinks() {
-
-    p6_file_symlink "$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6df-terraform/share/.terraform.d" "$HOME/.terraform.d"
-
-    p6_return_void
-}
-
 ######################################################################
 #<
 #
 # Function: p6df::modules::terraform::external::brews()
 #
 #>
-######################################################################
-p6df::modules::terraform::external::brews() {
-
-    p6df::core::homebrew::cli::brew::install opentofu
-#    p6df::core::homebrew::cli::brew::install hashicorp/tap/terraform
-
-    p6df::core::homebrew::cli::brew::install terraform-inventory
-    p6df::core::homebrew::cli::brew::install terraform-docs
-    p6df::core::homebrew::cli::brew::install terraform_landscape
-    p6df::core::homebrew::cli::brew::install terraformer
-    p6df::core::homebrew::cli::brew::install terraform-ls
-    p6df::core::homebrew::cli::brew::install iam-policy-json-to-terraform
-
-    p6_return_void
-}
-
 ######################################################################
 #<
 #
@@ -105,40 +144,12 @@ p6df::modules::terraform::external::brews() {
 #
 #>
 ######################################################################
-p6df::modules::terraform::aliases::init() {
-    local _module="$1"
-    local dir="$2"
-
-    p6_alias "tf"   "p6df::modules::terraform::cmd"
-    p6_alias "tfa"  "p6df::modules::terraform::cli::apply"
-    p6_alias "tfc"  "p6df::modules::terraform::cli::console"
-    p6_alias "tfd"  "p6df::modules::terraform::cli::destroy"
-    p6_alias "tfp"  "p6df::modules::terraform::cli::plan"
-    p6_alias "tfsl" "p6df::modules::terraform::cli::state::list"
-    p6_alias "tfv"  "p6df::modules::terraform::cli::validate"
-    p6_alias "tfwS" "p6df::modules::terraform::cli::workspace::select"
-    p6_alias "tfws" "p6df::modules::terraform::cli::workspace::show"
-
-    p6_return_void
-}
-
-######################################################################
 #<
 #
 # Function: p6df::modules::terraform::env::init()
 #
 #  Environment:	 TERRAFORM_BINARY_NAME
 #>
-######################################################################
-p6df::modules::terraform::env::init() {
-
-  local _module="$1"
-  local _dir="$2"
-  p6_env_export "TERRAFORM_BINARY_NAME" "tofu"
-
-  p6_return_void
-}
-
 ######################################################################
 #<
 #
@@ -191,14 +202,3 @@ p6_terraform_version() {
 # Function: p6df::modules::terraform::mcp()
 #
 #>
-######################################################################
-p6df::modules::terraform::mcp() {
-
-  p6df::core::homebrew::cli::brew::install terraform-mcp-server
-
-  p6df::modules::anthropic::mcp::server::add "terraform" "terraform-mcp-server"
-  p6df::modules::openai::mcp::server::add "terraform" "terraform-mcp-server"
-
-  p6_return_void
-}
-
