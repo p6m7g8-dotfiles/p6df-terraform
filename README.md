@@ -18,9 +18,7 @@
 
 ## Summary
 
-p6df module for Terraform/OpenTofu: CLI tools, workspace management, VSCode
-extensions, and MCP server (`terraform-mcp-server` via brew) for AI-driven
-infrastructure provisioning and resource management.
+TODO: Add a short summary of this module.
 
 ## Contributing
 
@@ -49,17 +47,16 @@ infrastructure provisioning and resource management.
     - _module
     - dir
 - `p6df::modules::terraform::deps()`
-- `p6df::modules::terraform::external::brew()`
-- `p6df::modules::terraform::home::symlink()`
-- `p6df::modules::terraform::init(_module, dir)`
+- `p6df::modules::terraform::env::init(_module, _dir)`
   - Args:
     - _module
-    - dir
+    - _dir
+- `p6df::modules::terraform::external::brews()`
+- `p6df::modules::terraform::home::symlinks()`
 - `p6df::modules::terraform::mcp()`
 - `p6df::modules::terraform::vscodes()`
 - `p6df::modules::terraform::vscodes::config()`
-- `str str = p6df::modules::terraform::prompt::mod()`
-- `str ver = p6_terraform_version()`
+- `str str = p6df::modules::terraform::prompt::context()`
 
 #### p6df-terraform/lib
 
@@ -86,6 +83,10 @@ infrastructure provisioning and resource management.
 
 - `path tfvar_file_path = p6df::modules::terraform::util::tfvar::file()`
 
+##### p6df-terraform/lib/version.zsh
+
+- `str ver = p6_terraform_version()`
+
 ## Hierarchy
 
 ```text
@@ -94,11 +95,12 @@ infrastructure provisioning and resource management.
 ├── lib
 │   ├── cli.sh
 │   ├── cmd.sh
-│   └── util.sh
+│   ├── util.sh
+│   └── version.zsh
 ├── README.md
 └── share
 
-3 directories, 5 files
+3 directories, 6 files
 ```
 
 ## Author
