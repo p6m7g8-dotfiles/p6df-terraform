@@ -20,41 +20,46 @@ p6df::modules::terraform::deps() {
 ######################################################################
 #<
 #
-# Function: p6df::modules::terraform::vscodes()
+# Function: p6df::modules::terraform::env::init()
 #
+#  Environment:	 TERRAFORM_BINARY_NAME
 #>
 ######################################################################
-p6df::modules::terraform::vscodes() {
+p6df::modules::terraform::env::init() {
 
-    p6df::modules::vscode::extension::install opentofu.vscode-opentofu
-    p6df::modules::vscode::extension::install mindginative.terraform-snippets
+  local _module="$1"
+  local _dir="$2"
+  p6_env_export "TERRAFORM_BINARY_NAME" "tofu"
 
-    p6_return_void
+  p6_return_void
 }
 
 ######################################################################
 #<
 #
-# Function: p6df::modules::terraform::vscodes::config()
+# Function: p6df::modules::terraform::aliases::init(_module, dir)
+#
+#  Args:
+#	_module -
+#	dir -
 #
 #>
 ######################################################################
-p6df::modules::terraform::vscodes::config() {
+p6df::modules::terraform::aliases::init() {
+    local _module="$1"
+    local dir="$2"
 
-  cat <<'EOF'
-  "[terraform]": {
-    "editor.defaultFormatter": "opentofu.vscode-opentofu"
-  },
-  "[terraform-vars]": {
-    "editor.defaultFormatter": "opentofu.vscode-opentofu"
-  },
-  "[hcl]": {
-    "editor.defaultFormatter": "opentofu.vscode-opentofu"
-  },
-  "terraform.experimentalFeatures.validateOnSave": true
-EOF
+    p6_alias "tf"   "p6df::modules::terraform::cmd"
+    p6_alias "tfa"  "p6df::modules::terraform::cli::apply"
+    p6_alias "tfc"  "p6df::modules::terraform::cli::console"
+    p6_alias "tfd"  "p6df::modules::terraform::cli::destroy"
+    p6_alias "tfp"  "p6df::modules::terraform::cli::plan"
+    p6_alias "tfsl" "p6df::modules::terraform::cli::state::list"
+    p6_alias "tfv"  "p6df::modules::terraform::cli::validate"
+    p6_alias "tfwS" "p6df::modules::terraform::cli::workspace::select"
+    p6_alias "tfws" "p6df::modules::terraform::cli::workspace::show"
 
-  p6_return_void
+    p6_return_void
 }
 
 ######################################################################
@@ -97,27 +102,31 @@ p6df::modules::terraform::external::brews() {
 ######################################################################
 #<
 #
-# Function: p6df::modules::terraform::aliases::init(_module, dir)
-#
-#  Args:
-#	_module -
-#	dir -
+# Function: p6df::modules::terraform::mcp()
 #
 #>
 ######################################################################
-p6df::modules::terraform::aliases::init() {
-    local _module="$1"
-    local dir="$2"
+p6df::modules::terraform::mcp() {
 
-    p6_alias "tf"   "p6df::modules::terraform::cmd"
-    p6_alias "tfa"  "p6df::modules::terraform::cli::apply"
-    p6_alias "tfc"  "p6df::modules::terraform::cli::console"
-    p6_alias "tfd"  "p6df::modules::terraform::cli::destroy"
-    p6_alias "tfp"  "p6df::modules::terraform::cli::plan"
-    p6_alias "tfsl" "p6df::modules::terraform::cli::state::list"
-    p6_alias "tfv"  "p6df::modules::terraform::cli::validate"
-    p6_alias "tfwS" "p6df::modules::terraform::cli::workspace::select"
-    p6_alias "tfws" "p6df::modules::terraform::cli::workspace::show"
+  p6df::core::homebrew::cli::brew::install terraform-mcp-server
+
+  p6df::modules::anthropic::mcp::server::add "terraform" "terraform-mcp-server"
+  p6df::modules::openai::mcp::server::add "terraform" "terraform-mcp-server"
+
+  p6_return_void
+}
+
+######################################################################
+#<
+#
+# Function: p6df::modules::terraform::vscodes()
+#
+#>
+######################################################################
+p6df::modules::terraform::vscodes() {
+
+    p6df::modules::vscode::extension::install opentofu.vscode-opentofu
+    p6df::modules::vscode::extension::install mindginative.terraform-snippets
 
     p6_return_void
 }
@@ -125,16 +134,24 @@ p6df::modules::terraform::aliases::init() {
 ######################################################################
 #<
 #
-# Function: p6df::modules::terraform::env::init()
+# Function: p6df::modules::terraform::vscodes::config()
 #
-#  Environment:	 TERRAFORM_BINARY_NAME
 #>
 ######################################################################
-p6df::modules::terraform::env::init() {
+p6df::modules::terraform::vscodes::config() {
 
-  local _module="$1"
-  local _dir="$2"
-  p6_env_export "TERRAFORM_BINARY_NAME" "tofu"
+  cat <<'EOF'
+  "[terraform]": {
+    "editor.defaultFormatter": "opentofu.vscode-opentofu"
+  },
+  "[terraform-vars]": {
+    "editor.defaultFormatter": "opentofu.vscode-opentofu"
+  },
+  "[hcl]": {
+    "editor.defaultFormatter": "opentofu.vscode-opentofu"
+  },
+  "terraform.experimentalFeatures.validateOnSave": true
+EOF
 
   p6_return_void
 }
@@ -183,22 +200,5 @@ p6_terraform_version() {
   fi
 
   p6_return_str "$ver"
-}
-
-######################################################################
-#<
-#
-# Function: p6df::modules::terraform::mcp()
-#
-#>
-######################################################################
-p6df::modules::terraform::mcp() {
-
-  p6df::core::homebrew::cli::brew::install terraform-mcp-server
-
-  p6df::modules::anthropic::mcp::server::add "terraform" "terraform-mcp-server"
-  p6df::modules::openai::mcp::server::add "terraform" "terraform-mcp-server"
-
-  p6_return_void
 }
 
